@@ -1,0 +1,56 @@
+[
+ {
+   "id": 1,
+   "name": "Wolf",
+   "health_points": 10,
+   "damage": 5,
+   "speed": 4,
+   "experience_given": 10,
+   "gold_given": 7
+ },
+ {
+   "id": 2,
+   "name": "Cat",
+   "health_points": 5,
+   "damage": 7,
+   "speed": 7,
+   "experience_given": 5,
+   "gold_given": 3
+ },
+ {
+   "id": 3,
+   "name": "Dog",
+   "health_points": 8,
+   "damage": 6,
+   "speed": 4,
+   "experience_given": 6,
+   "gold_given": 4
+ },
+ {
+   "id": 4,
+   "name": "Lizard",
+   "health_points": 4,
+   "damage": 9,
+   "speed": 7,
+   "experience_given": 4,
+   "gold_given": 3
+ },
+ {
+   "id": 5,
+   "name": "Horse",
+   "health_points": 12,
+   "damage": 9,
+   "speed": 5,
+   "experience_given": 12,
+   "gold_given": 8
+ },
+ {
+   "id": 6,
+   "name": "Eagle",
+   "health_points": 4,
+   "damage": 5,
+   "speed": 10,
+   "experience_given": 7,
+   "gold_given": 7
+ }
+]

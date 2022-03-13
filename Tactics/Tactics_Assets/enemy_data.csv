@@ -1,0 +1,7 @@
+id;name;health_points;damage;speed;experience_given;gold_given
+1;Wolf;10;5;4;10;7
+2;Cat;5;7;7;5;3
+3;Dog;8;6;4;6;4
+4;Lizard;4;9;7;4;3
+5;Horse;12;9;5;12;8
+6;Eagle;4;5;10;7;7
