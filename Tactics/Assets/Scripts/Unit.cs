@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 { 
-    int maxMoveDistance;
-    public Tile placement;
+    public int maxMoveDistance;
+    public Tile placementTile;
 }
