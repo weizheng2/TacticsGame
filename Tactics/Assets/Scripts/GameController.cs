@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
     [SerializeField] Camera mainCamera;
     [SerializeField] Board board;
     List<Tile> selectedTiles = new List<Tile>();
-
+     
     void Update()
     {
         if (Input.GetMouseButtonDown(0))

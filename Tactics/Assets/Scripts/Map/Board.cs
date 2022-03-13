@@ -13,15 +13,28 @@ public class Board : MonoBehaviour
     [SerializeField] LevelDataDB levelData;
 
 
-    [ContextMenu("ClearTiles")]
-    public void ClearTiles() 
+    private void Start()
     {
-        tiles.Clear();
+        LoadTilesDictionary();
+    }
+
+    void LoadTilesDictionary()
+    {
+        for (int i = 0; i < this.transform.childCount; i++)
+        {
+            GameObject child = this.transform.GetChild(i).gameObject;
+
+            Tile t = child.GetComponent<Tile>();
+            t.Load(levelData.tiles[i]);
+            tiles.Add(t.pos, t);
+        }
     }
 
     [ContextMenu("LoadBoardData")]
     public void LoadBoardData()//(LevelDataDB data)
     {
+        tiles.Clear();
+
         for (int i = 0; i < levelData.tiles.Count; ++i)
         {
             GameObject instance = Instantiate(tilePrefab) as GameObject;
@@ -92,7 +105,7 @@ public class Board : MonoBehaviour
         foreach (Tile auxTile in posibleTiles)
         {
             auxTile.SetSelectedColor(true);
-            Debug.LogError(auxTile.name);
+            //Debug.LogError(auxTile.name);
         }
 
         return posibleTiles;
