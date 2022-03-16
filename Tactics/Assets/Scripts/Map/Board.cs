@@ -12,6 +12,18 @@ public class Board : MonoBehaviour
 
     [SerializeField] LevelDataDB levelData;
 
+    public static Board instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    public static Board GetInstance()
+    {
+        if (instance == null) instance = new Board();
+        return instance;
+    }
 
     private void Start()
     {
@@ -96,17 +108,12 @@ public class Board : MonoBehaviour
                     nextQueue.Enqueue(nextTile);
                 }
             }
-
+            
             if(currentQueue.Count == 0)
                 SwapRef(ref currentQueue, ref nextQueue);
         }
 
-
-        foreach (Tile auxTile in posibleTiles)
-        {
-            auxTile.SetSelectedColor(true);
-            //Debug.LogError(auxTile.name);
-        }
+        ToggleSelectedTiles(posibleTiles, true);
 
         return posibleTiles;
     }
@@ -119,5 +126,13 @@ public class Board : MonoBehaviour
         t = ob1;
         ob1 = ob2;
         ob2 = t;
+    }
+
+    public void ToggleSelectedTiles(List<Tile> selectedTiles, bool toggle)
+    {
+        foreach (Tile auxTile in selectedTiles)
+        {
+            auxTile.SetSelectedColor(toggle);
+        }
     }
 }

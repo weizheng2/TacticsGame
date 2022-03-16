@@ -20,6 +20,9 @@ public class Tile : MonoBehaviour
     public Color selectedColor = Color.green;
     [SerializeField] Renderer renderel;
 
+    // The unit/prop that is in this tile
+    public GameObject content; 
+
     public void SetSelectedColor(bool selected)
     {
         if(selected)

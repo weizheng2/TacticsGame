@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     [SerializeField] Camera mainCamera;
-    [SerializeField] Board board;
     List<Tile> selectedTiles = new List<Tile>();
     Unit unit;
     void Update()
@@ -20,28 +19,23 @@ public class GameController : MonoBehaviour
                 {
                     if (selectedTiles != null || selectedTiles.Count > 0)
                     {
-                        foreach (Tile auxTile in selectedTiles)
-                        {
-                            auxTile.SetSelectedColor(false);
-                        }
+                        Board.GetInstance().ToggleSelectedTiles(selectedTiles, false);
                         selectedTiles.Clear();
                     }
-                    unit = hit.transform.root.GetComponent<Unit>();
-                    selectedTiles = board.Search(unit.placementTile, unit.maxMoveDistance);
+                    unit = hit.transform.parent.parent.GetComponent<Unit>();
+                    selectedTiles = unit.movement.GetTilesInRange();
+                    Board.GetInstance().ToggleSelectedTiles(selectedTiles, true);
                 }
 
                 if (hit.transform.tag == "Tile")
                 {
                     if ((selectedTiles != null || selectedTiles.Count > 0) && unit != null)
                     {
-                        unit.transform.position = hit.transform.GetComponent<Tile>().CenterPos;
-                      
-                        unit.placementTile = hit.transform.GetComponent<Tile>();
+                        //unit.transform.localPosition = hit.transform.GetComponent<Tile>().CenterPos;
+                        unit.SetPlace(hit.transform.GetComponent<Tile>());
                         unit = null;
-                        foreach (Tile auxTile in selectedTiles)
-                        {
-                            auxTile.SetSelectedColor(false);
-                        }
+                        Board.GetInstance().ToggleSelectedTiles(selectedTiles, false);
+
                         selectedTiles.Clear();
                     }
 
