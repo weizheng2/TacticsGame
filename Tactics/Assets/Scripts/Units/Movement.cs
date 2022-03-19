@@ -19,10 +19,15 @@ public class Movement : MonoBehaviour
 
     public virtual List<Tile> GetTilesInRange()
     {
-        List<Tile> tilesInRange = Board.GetInstance().Search(unit.tile, range);
+        List<Tile> tilesInRange = Board.GetInstance().Search(unit.tile, ExpandSearch);
         return FilterSearch(tilesInRange);
     }
     
+    protected virtual bool ExpandSearch(Tile from, Tile to)
+    {
+        return (from.distance + 1) <= range;
+    }
+
     protected virtual List<Tile> FilterSearch(List<Tile> tiles)
     {
         // From the absolute list we get, remove the tiles that already have something in them (unit, prop, etc)

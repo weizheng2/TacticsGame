@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -77,7 +78,11 @@ public class Board : MonoBehaviour
         new Point(0,-1) // West
     };
 
-    public List<Tile> Search(Tile initTile, int distance)
+
+    // Func<Tile,Tile,bool> addTile -> Func delegate
+    // The Func delegate allows you to specify a method that takes a number of parameters of a specific type and returns a single argument of a specific type.
+    // Function that takes two "Tile" parameters and returns a bool
+    public List<Tile> Search(Tile initTile, Func<Tile,Tile,bool> addTile)
     {
         RestartTiles();
 
@@ -99,7 +104,11 @@ public class Board : MonoBehaviour
             {
                 tiles.TryGetValue(currentTile.pos + directions[i], out Tile nextTile);
 
-                if (nextTile != null && currentTile.distance + 1 <= distance && nextTile.parentTile == null) 
+
+                if (nextTile == null || nextTile.distance <= currentTile.distance + 1 )
+                    continue;
+
+                if (addTile(currentTile, nextTile))
                 {
                     nextTile.distance = currentTile.distance + 1;
                     nextTile.parentTile = currentTile;
@@ -112,8 +121,6 @@ public class Board : MonoBehaviour
             if(currentQueue.Count == 0)
                 SwapRef(ref currentQueue, ref nextQueue);
         }
-
-        ToggleSelectedTiles(posibleTiles, true);
 
         return posibleTiles;
     }
