@@ -27,4 +27,56 @@ public class WalkMovement : Movement
         }
         return newTiles;
     }
+
+    public override IEnumerator Move(Tile targetTile)
+    {
+        List<Tile> pathTiles = new List<Tile>();
+
+        // Fill path of tiles
+        while (targetTile != null)
+        {
+            // First in last out, could also use a Stack
+            pathTiles.Insert(0, targetTile);
+            targetTile = targetTile.parentTile;
+        }
+
+        // For every next tile, turn if necessary and walk/jump
+        for (int i = 1; i < pathTiles.Count; ++i)
+        {
+            Tile from = pathTiles[i - 1];
+            Tile to = pathTiles[i];
+
+            Directions dir = from.GetDirection(to);
+            if (dir != unit.direction)
+                Turn(dir);
+
+            //if (from.height == to.height)
+                //yield return StartCoroutine(Walk(to));
+            //else
+               // yield return StartCoroutine(Jump(to));
+        }
+
+
+        yield return null;
+    }
+
+    LTDescr moveTween;
+    public IEnumerator Walk(Tile targetTile)
+    {
+        moveTween = LeanTween.move(unit.gameObject, targetTile.CenterPos, 1f).setEase(LeanTweenType.easeInQuad).setOnComplete(OnCompleteStep);
+        
+        while (moveTween != null)
+            yield return null;
+    }
+
+    void OnCompleteStep() => moveTween = null;
+
+
+    public IEnumerator Jump(Tile targetTile)
+    {
+        moveTween = LeanTween.move(unit.gameObject, targetTile.CenterPos, 1f).setEase(LeanTweenType.easeInQuad).setOnComplete(OnCompleteStep);
+
+        while (moveTween != null)
+            yield return null;
+    }
 }

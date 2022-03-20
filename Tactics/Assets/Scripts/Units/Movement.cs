@@ -1,8 +1,10 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+
+public abstract class Movement : MonoBehaviour
 {
     public int range;
     public int jumpHeight;
@@ -39,4 +41,11 @@ public class Movement : MonoBehaviour
         return tiles;
     }
 
+    protected virtual void Turn(Directions direction)
+    {
+        LeanTween.rotate(unit.gameObject, direction.ToEuler(), 0.5f).setEase(LeanTweenType.easeInQuad);
+        unit.direction = direction;
+    }
+
+    public abstract IEnumerator Move(Tile targetTile);
 }

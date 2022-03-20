@@ -2259,7 +2259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 2
-  jumpHeight: -1
+  jumpHeight: 2
 --- !u!1 &254290728
 GameObject:
   m_ObjectHideFlags: 0

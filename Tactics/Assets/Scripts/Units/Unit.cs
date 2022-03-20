@@ -26,6 +26,5 @@ public class Unit : MonoBehaviour
     public void UpdateTransform()
     {
         transform.position = tile.CenterPos;
-        transform.localEulerAngles = direction.ToEuler();
     }
 }

@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour
     [SerializeField] Camera mainCamera;
     List<Tile> selectedTiles = new List<Tile>();
     Unit unit;
+    LTDescr moveTween;
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -33,10 +35,14 @@ public class GameController : MonoBehaviour
                     {
                         //unit.transform.localPosition = hit.transform.GetComponent<Tile>().CenterPos;
                         unit.SetPlace(hit.transform.GetComponent<Tile>());
+                   
+                        StartCoroutine(unit.movement.Move(hit.transform.GetComponent<Tile>()));
                         unit = null;
                         Board.GetInstance().ToggleSelectedTiles(selectedTiles, false);
 
                         selectedTiles.Clear();
+
+            
                     }
 
                 }
