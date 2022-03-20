@@ -20,7 +20,7 @@ public class Unit : MonoBehaviour
         if (target != null)
             target.content = this.gameObject;
 
-        UpdateTransform();
+        //UpdateTransform();
     }
 
     public void UpdateTransform()

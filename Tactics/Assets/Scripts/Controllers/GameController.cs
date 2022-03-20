@@ -34,7 +34,7 @@ public class GameController : MonoBehaviour
                     if ((selectedTiles != null || selectedTiles.Count > 0) && unit != null)
                     {
                         //unit.transform.localPosition = hit.transform.GetComponent<Tile>().CenterPos;
-                        unit.SetPlace(hit.transform.GetComponent<Tile>());
+                        //unit.SetPlace(hit.transform.GetComponent<Tile>());
                    
                         StartCoroutine(unit.movement.Move(hit.transform.GetComponent<Tile>()));
                         unit = null;

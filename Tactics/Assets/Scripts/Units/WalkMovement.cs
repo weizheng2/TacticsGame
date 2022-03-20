@@ -30,6 +30,8 @@ public class WalkMovement : Movement
 
     public override IEnumerator Move(Tile targetTile)
     {
+        unit.SetPlace(targetTile);
+
         List<Tile> pathTiles = new List<Tile>();
 
         // Fill path of tiles
@@ -51,7 +53,7 @@ public class WalkMovement : Movement
                 Turn(dir);
 
             //if (from.height == to.height)
-                //yield return StartCoroutine(Walk(to));
+                yield return StartCoroutine(Walk(to));
             //else
                // yield return StartCoroutine(Jump(to));
         }
@@ -63,7 +65,7 @@ public class WalkMovement : Movement
     LTDescr moveTween;
     public IEnumerator Walk(Tile targetTile)
     {
-        moveTween = LeanTween.move(unit.gameObject, targetTile.CenterPos, 1f).setEase(LeanTweenType.easeInQuad).setOnComplete(OnCompleteStep);
+        moveTween = LeanTween.move(unit.gameObject, targetTile.CenterPos, 0.5f).setEase(LeanTweenType.easeInQuad).setOnComplete(OnCompleteStep);
         
         while (moveTween != null)
             yield return null;
@@ -74,7 +76,7 @@ public class WalkMovement : Movement
 
     public IEnumerator Jump(Tile targetTile)
     {
-        moveTween = LeanTween.move(unit.gameObject, targetTile.CenterPos, 1f).setEase(LeanTweenType.easeInQuad).setOnComplete(OnCompleteStep);
+        moveTween = LeanTween.move(unit.gameObject, targetTile.CenterPos, 0.5f).setEase(LeanTweenType.easeInQuad).setOnComplete(OnCompleteStep);
 
         while (moveTween != null)
             yield return null;
