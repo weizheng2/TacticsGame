@@ -6,7 +6,7 @@ Inspired by games like "Final Fantasy Tactics Advance," this demo showcases some
 Having always been a fan of tactical RPGs, I wanted to at least implement the fundamental aspects of tactical combat.
 
 
-Try it: weizh2.itch.io/tactics-rpg
+Try it: [weizh2.itch.io/tactics-rpg](weizh2.itch.io/tactics-rpg).
 
 ![image1](Images/img1.png)
 ![image2](Images/img2.png)
